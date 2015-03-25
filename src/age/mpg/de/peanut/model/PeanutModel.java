@@ -465,40 +465,40 @@ public class PeanutModel {
 	}
 
 	public List<StatisticResults> getStatisticsResultList() {
-		if (statisticsResultList.size() == 0 || statisticsResultList == null)
-			logger.warn("Unexpected value for statisticsResultList");
+		if (statisticsResultList == null)
+			logger.warn("Null value for statisticsResultList");
 		else
 			logger.info("Getting statistic results... size: " + statisticsResultList.size());
 		return statisticsResultList;
 	}
 
 	public void setStatisticsResultList(List<StatisticResults> statisticsResultList) {
-		if (statisticsResultList.size() == 0 || statisticsResultList == null)
-			logger.warn("Unexpected value for statisticsResultList");
+		if (statisticsResultList == null)
+			logger.warn("Null value for statisticsResultList");
 		else
 			logger.info("Setting statistic results... size: " + statisticsResultList.size() );
 		this.statisticsResultList = statisticsResultList;
 	}
 
 	public Map<String, PathwayObjectStatistics> getPathwayDistributionMap() {
-		if (pathwayDistributionMap.size() == 0 || pathwayDistributionMap == null)
-			logger.warn("Unexpected size for pathwayDistributionMap");
+		if (pathwayDistributionMap == null)
+			logger.warn("Null value for pathwayDistributionMap");
 		else
 			logger.info("Getting pathwayDistributionMap.... size: " + pathwayDistributionMap.size());
 		return pathwayDistributionMap;
 	}
 
 	public void setPathwayDistributionMap(Map<String, PathwayObjectStatistics> pathwayDistributionMap) {
-		if (pathwayDistributionMap.size() == 0 || pathwayDistributionMap == null)
-			logger.warn("Unexpected size for pathwayDistributionMap");
+		if (pathwayDistributionMap == null)
+			logger.warn("Null value for pathwayDistributionMap");
 		else
 			logger.info("Setting pathwayDistributionMap.... size: " + pathwayDistributionMap.size());
 		this.pathwayDistributionMap = pathwayDistributionMap;
 	}
 
 	public List<KEGGInteraction> getKeggInteractionList() {
-		if (keggInteractionList.size() == 0 || keggInteractionList == null)
-			logger.warn("Unexpected size for keggInteractionList");
+		if (keggInteractionList == null)
+			logger.warn("Null value for  keggInteractionList");
 		else
 			logger.info("Getting keggInteractionList... size: " + keggInteractionList.size());		
 		
@@ -506,8 +506,8 @@ public class PeanutModel {
 	}
 
 	public void setKeggInteractionList(List<KEGGInteraction> keggInteractionList) {
-		if (keggInteractionList.size() == 0 || keggInteractionList == null)
-			logger.warn("Unexpected size for keggInteractionList");
+		if (keggInteractionList == null)
+			logger.warn("Unexpected value for keggInteractionList");
 		else
 			logger.info("Setting keggInteractionList... size: " + keggInteractionList.size());		
 		
