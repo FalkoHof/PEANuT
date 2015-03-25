@@ -145,7 +145,7 @@ public class StartDialogues extends JDialog {
 				try {
 					new Peanut().findPathways();
 					String message = "Done - Network annotated with " + PeanutModel.getInstance().getDatabase() + " pathways.";
-					if (PeanutModel.getInstance().isImportKeggInteractions())
+					if ((PeanutModel.getInstance().isImportKeggInteractions()) && (PeanutModel.getInstance().consensusPathDB()))
 						message = message + "\nInteractions imported from KEGG: " + PeanutModel.getInstance().getNumerOfaddedEdges();
 					JOptionPane.showMessageDialog(null, message,"Annotation Results", JOptionPane.INFORMATION_MESSAGE);
 				} catch (Exception e1) {

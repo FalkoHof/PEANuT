@@ -64,7 +64,7 @@ public class DependenciesDownloader implements Task {
 			}
 			JOptionPane.showMessageDialog(null, "Files successfully downloaded!","PathwayFinder - Download/update files", JOptionPane.INFORMATION_MESSAGE);							
 		} catch(IOException e){
-			JOptionPane.showMessageDialog(null, "An error occoured while downloading.\nSee the project wiki for help", "PathwayFinder - Download/update files", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "An error occoured while downloading.\nSee the project wiki for help on how to manually download the files", "PathwayFinder - Download/update files", JOptionPane.ERROR_MESSAGE);
 			logger.warn("An error occoured while downloading", e);
 		}
 		

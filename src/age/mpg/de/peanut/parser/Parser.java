@@ -148,8 +148,8 @@ public class Parser implements Task {
 		String[] temp = line.split("\t");
 		if (temp.length > 2){
 			String pathwayName = temp[0];
-			String databaseName = temp[1];
-			String ids = temp[2];
+			String databaseName = temp[2];
+			String ids = temp[3];
 			List<String>idList =  Arrays.asList(ids.split("[,]"));
 			ConsensusPathDBObject pathway = new ConsensusPathDBObject(pathwayName, databaseName, idList);
 			cpdbPathways.add(pathway);

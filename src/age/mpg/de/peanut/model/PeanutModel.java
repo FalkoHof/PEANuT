@@ -80,6 +80,12 @@ public class PeanutModel {
 	private boolean pcNCINature = true;
 	private boolean pcIMID = true;
 	
+	
+	//booleans for statistics bejamini hoechst is the default
+	private boolean noFRD = false;
+	private boolean bonferonni = false;
+	private boolean bejaminiHoechstFDR = true;
+	
 	//values for pathway commons data_source parameters 
 	private final String pc_parameter_CellMap = "CELL_MAP";
 	private final String pc_parameter_HumanCyc = "HUMANCYC";
@@ -525,4 +531,33 @@ public class PeanutModel {
 	public void setNumerOfaddedEdges(int numerOfaddedEdges) {
 		NumerOfaddedEdges = numerOfaddedEdges;
 	}
+
+	public boolean isNoFRD() {
+		return noFRD;
+	}
+
+	public void setNoFRD(boolean noFRD) {
+		logger.info("Setting noFRD: " +  noFRD);
+		this.noFRD = noFRD;
+	}
+
+	public boolean isBonferonni() {
+		return bonferonni;
+	}
+
+	public void setBonferonni(boolean bonferonni) {
+		logger.info("Setting bonferonni: " +  bonferonni);
+		this.bonferonni = bonferonni;
+	}
+
+	public boolean isBejaminiHoechstFDR() {
+		return bejaminiHoechstFDR;
+	}
+
+	public void setBejaminiHoechstFDR(boolean bejaminiHoechstFDR) {
+		logger.info("Setting bejaminiHoechstFDR: " +  bejaminiHoechstFDR);
+		this.bejaminiHoechstFDR = bejaminiHoechstFDR;
+	}
+	
+	
 }

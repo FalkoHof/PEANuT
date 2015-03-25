@@ -85,7 +85,7 @@ public class DownloaderDialogues extends JDialog{
 		downloadLayout.setVgap(10);
 		GridLayout closeBtnLayout = new GridLayout(0,3);
 		closeBtnLayout.setHgap(50);
-	
+		
 	
 		downloadPanel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();

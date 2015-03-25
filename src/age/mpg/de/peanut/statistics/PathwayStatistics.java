@@ -21,13 +21,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import age.mpg.de.peanut.managers.TaskManagerManager;
 import age.mpg.de.peanut.model.PeanutModel;
 import age.mpg.de.peanut.utilityobjects.cytoscapeparsing.pathway.PathwayObjectStatistics;
-
 import cytoscape.logger.CyLogger;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
@@ -69,9 +69,9 @@ public class PathwayStatistics implements Task {
 			logger.error("try method doStatistics() failed");
 			e.printStackTrace();
 		}	
-		
 	}
 	
+
 	//method for calculating p-values
 	private void doStatistics(){
 		taskMonitor.setStatus("Loading pathway data...");
@@ -80,7 +80,7 @@ public class PathwayStatistics implements Task {
 		int parentNetworkSize = PeanutModel.getInstance().getParentSize();
 		int childNetworkSize = PeanutModel.getInstance().getChildSize();
 		double threshold = PeanutModel.getInstance().getpValue();
-
+		
 		pathwayDistributionMap = PeanutModel.getInstance().getPathwayDistributionMap();
 		
 		List<String>pathwayNames = new ArrayList<String>(pathwayDistributionMap.keySet());
@@ -90,6 +90,11 @@ public class PathwayStatistics implements Task {
 		//List for holding the results
 		resultList = new ArrayList<StatisticResults>();
 
+		//get p-values for multipleTestingCorrection
+		threshold = multipleTestingCorrection(threshold,pathwayNames.size());
+
+		
+		
 		int counter = 0;
 
 		//loop through all the pathways found in the child network
@@ -122,20 +127,75 @@ public class PathwayStatistics implements Task {
 				continue;
 			
 			HypergeometricDist hd = new HypergeometricDist(pathwaySize, parentNetworkSize,numberOfFoundMembers, childNetworkSize);
-			
-			
+						
 			double pValueOneTailed = hd.computeOneTailedFisher();
-			int compare = Double.compare(pValueOneTailed, threshold);
+			
+			//int compare = Double.compare(pValueOneTailed, threshold);
 			
 			//check if p-Value is below the set threshold
-			if (compare == 0 || compare < 0){
+			//if (compare == 0 || compare < 0){
 				StatisticResults res = new StatisticResults(s, obj.getBioIdsFoundMembers(), obj.getCytoscapeIdsFoundMembers(), obj.getPathwaySize(),pValueOneTailed);
 				resultList.add(res);
-			}
+			//}
+				
 		}
-		PeanutModel.getInstance().setStatisticsResultList(resultList);
+		//Sort list in ascending order for fdr correction		
+		Collections.sort(resultList);
+		//perform selected fdr and set results to show
+		PeanutModel.getInstance().setStatisticsResultList(filterResults(resultList));
 		taskMonitor.setPercentCompleted(100);
 	}
+	
+		
+	private List<StatisticResults> filterResults(List<StatisticResults> resultList){
+		
+		List<StatisticResults> filteredList = new ArrayList<StatisticResults>();
+		double threshold = PeanutModel.getInstance().getpValue();
+		double thresholdBonferonni = threshold/resultList.size()*1.0;
+
+		boolean noFDR = PeanutModel.getInstance().isNoFRD();
+		boolean bonferonni = PeanutModel.getInstance().isBonferonni();
+		boolean bejaminiHoechstFDR = PeanutModel.getInstance().isBejaminiHoechstFDR();
+		
+		//initilize counter for benjamini hoechstberg
+		int counter=0;
+
+		for (StatisticResults result : resultList){
+			counter++;
+			
+			if (noFDR)
+				if (result.getOneTailed() <= threshold)
+					filteredList.add(result);
+		   
+			if (bonferonni)
+				if (result.getOneTailed() <= thresholdBonferonni)
+					filteredList.add(result);
+			
+			if (bejaminiHoechstFDR)
+				if (result.getOneTailed() <= threshold*(counter*1.0/resultList.size()))
+					filteredList.add(result);
+			
+		}
+		return filteredList;			
+	}
+	
+	
+	private double multipleTestingCorrection(double threshold, int numberOfTests) {
+		
+		boolean bonferonni = false;
+		boolean fdr = false;
+		double pValue = PeanutModel.getInstance().getpValue();
+					
+		if (bonferonni)
+			pValue = pValue/numberOfTests*1.0;
+	
+		if (fdr)
+			pValue = numberOfTests*pValue;
+			
+		return(pValue);		
+	}
+	
+	
 	
 	
 	// method for saving the results as file

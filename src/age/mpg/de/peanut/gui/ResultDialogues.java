@@ -76,6 +76,8 @@ public class ResultDialogues extends JDialog{
 	private File outputFile  = new File("output.txt");
 	private String[] networkIdArray;
 	private String[] networkTitleArray;
+	private String[] fdrArray = {"No FDR","Bonferonni","Benjamini Hochberg"};
+
 	private PeanutTableModelPathways tableModel;
 	private JTable table;
 	private final static String titel = PluginProperties.getInstance().getPluginName() +  " - Results";
@@ -112,7 +114,9 @@ public class ResultDialogues extends JDialog{
 	
 	private JPanel selectNetworkPanels(){
 
-		String lableNetworkParent = "Background Network:"; String lableNetworkChild = "Focus Network:"; String lableTextField = "P-value:";
+		String lableNetworkParent = "Background Network:"; String lableNetworkChild = "Focus Network:"; 
+		String lableTextField = "P-value:"; String lableFdr ="Multiple Testing:";
+		
 
 		Set<CyNetwork>networkSet = Cytoscape.getNetworkSet();
 		networkIdArray = new String[networkSet.size()];
@@ -156,7 +160,31 @@ public class ResultDialogues extends JDialog{
 	    	    		PeanutModel.getInstance().setChildNetwork(networkIdArray[i]);	
 	    		}
 	    	}});	
-		
+	
+		//create JComboBox and listener for  selection
+		JComboBox fdrCorrection = new JComboBox(fdrArray);
+		fdrCorrection.setEditable(false);
+		fdrCorrection.setSelectedIndex(2);
+		//PeanutModel.getInstance().setChildNetwork(networkIdArray[0]);
+		fdrCorrection.addItemListener(new ItemListener(){
+	    	public void itemStateChanged(ItemEvent evt){
+	    		String input = (String) evt.getItem();
+	    		if (input.equals("No FDR")){
+	    			PeanutModel.getInstance().setBejaminiHoechstFDR(false);
+	    			PeanutModel.getInstance().setBonferonni(false);
+	    			PeanutModel.getInstance().setNoFRD(true);
+	    		}
+	    		if (input.equals("Bonferonni")){
+	    			PeanutModel.getInstance().setBejaminiHoechstFDR(false);
+	    			PeanutModel.getInstance().setBonferonni(true);
+	    			PeanutModel.getInstance().setNoFRD(false);
+	    		}
+	    		if (input.equals("Benjamini Hochberg")){
+	    			PeanutModel.getInstance().setBejaminiHoechstFDR(true);
+	    			PeanutModel.getInstance().setBonferonni(false);
+	    			PeanutModel.getInstance().setNoFRD(false);
+	    		}
+	    	}});	
 
 		// create JTextField for entering the p-Value threshold
 		pValueField = new JTextField();
@@ -194,8 +222,10 @@ public class ResultDialogues extends JDialog{
 		// create JLables for the components
 		JLabel jLableComboBoxNetworkParent = new JLabel(lableNetworkParent, JLabel.RIGHT);
 		JLabel jLableComboBoxNetworkChild = new JLabel(lableNetworkChild, JLabel.RIGHT);
+		JLabel jLableComboBoxFdr = new JLabel(lableFdr, JLabel.RIGHT);
+
 		JLabel jLableTextField = new JLabel(lableTextField,SwingConstants.TRAILING);
-			
+		/*
 		//create JPanels for nicer look
 		JPanel panelParentNetwork = new JPanel();
 		JPanel panelChildNetwork = new JPanel();
@@ -207,7 +237,7 @@ public class ResultDialogues extends JDialog{
 		panelChildNetwork.setLayout(new BoxLayout(panelChildNetwork, BoxLayout.X_AXIS));
 		panelTextField.setLayout(new BoxLayout(panelTextField, BoxLayout.X_AXIS));
 		
-			
+		
 		//add stuff to the panles
 		panelParentNetwork.add(jLableComboBoxNetworkParent);
 		panelParentNetwork.add(Box.createHorizontalGlue()); 
@@ -222,14 +252,18 @@ public class ResultDialogues extends JDialog{
 		panelTextField.add(pValueField);
 			
 		panelButtons.add(searchBtn);
-			
+		*/
 		//add stuff to the JPanel
-		JPanel selectNetworksPanel = new JPanel();
 		
+		
+		JPanel selectNetworksPanel = new JPanel();
+	
 		selectNetworksPanel.add(jLableComboBoxNetworkParent);
 		selectNetworksPanel.add(cbNetworkParent);
 		selectNetworksPanel.add(jLableComboBoxNetworkChild);
 		selectNetworksPanel.add(cbNetworkChild);
+		selectNetworksPanel.add(jLableComboBoxFdr);
+		selectNetworksPanel.add(fdrCorrection);
 		selectNetworksPanel.add(jLableTextField);
 		selectNetworksPanel.add(pValueField);
 		selectNetworksPanel.add(searchBtn);

@@ -21,7 +21,7 @@ import java.util.Set;
 
 import age.mpg.de.peanut.model.PeanutModel;
 
-public class StatisticResults {
+public class StatisticResults implements Comparable<StatisticResults> {
 	
 	private String pathwayName = "";
 	private String displayName = "";
@@ -35,10 +35,12 @@ public class StatisticResults {
 	private int pathwaySize = 0;
 	
 	// fisher's exact test results
-	private double oneTailed;
+	private double pValueOneTailed;
 
 	// booleans to specifiy if the result has been selected for visualisation and can be visualized
 	private boolean selected = false;
+	
+	
 	
 	private Set<String>bioIdSet;
 	private Set<String>cyIdSet;
@@ -47,7 +49,7 @@ public class StatisticResults {
 		this.pathwayName = pathwayName;
 		this.bioIdSet = bioIdSet;
 		this.cyIdSet = cytoscapeIdSet;
-		this.oneTailed = oneTailed;
+		this.pValueOneTailed = oneTailed;
 		this.pathwaySize = pathwaySize;
 		numberOfNodes = cyIdSet.size();
 		numberOfMembers = bioIdSet.size();
@@ -82,7 +84,7 @@ public class StatisticResults {
 	}
 	
 	public double getOneTailed() {
-		return oneTailed;
+		return pValueOneTailed;
 	}
 
 	public String getPathwayName() {
@@ -131,5 +133,11 @@ public class StatisticResults {
 	
 	public double getCoverage(){
 		return (numberOfMembers*100.0)/(pathwaySize);
+	}
+
+
+	@Override
+	public int compareTo(StatisticResults o) {
+		return Double.compare(pValueOneTailed, o.getOneTailed());
 	}
 }
