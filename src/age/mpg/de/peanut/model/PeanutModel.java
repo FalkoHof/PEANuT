@@ -83,7 +83,7 @@ public class PeanutModel {
 	
 	//booleans for statistics bejamini hoechst is the default
 	private boolean noFRD = false;
-	private boolean bonferonni = false;
+	private boolean bonferroni = false;
 	private boolean bejaminiHoechstFDR = true;
 	
 	//values for pathway commons data_source parameters 
@@ -541,13 +541,13 @@ public class PeanutModel {
 		this.noFRD = noFRD;
 	}
 
-	public boolean isBonferonni() {
-		return bonferonni;
+	public boolean isBonferroni() {
+		return bonferroni;
 	}
 
-	public void setBonferonni(boolean bonferonni) {
-		logger.info("Setting bonferonni: " +  bonferonni);
-		this.bonferonni = bonferonni;
+	public void setBonferroni(boolean bonferonni) {
+		logger.info("Setting bonferroni: " +  bonferonni);
+		this.bonferroni = bonferonni;
 	}
 
 	public boolean isBejaminiHoechstFDR() {

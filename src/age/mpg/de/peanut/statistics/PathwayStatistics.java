@@ -145,10 +145,10 @@ public class PathwayStatistics implements Task {
 		
 		List<StatisticResults> filteredList = new ArrayList<StatisticResults>();
 		double threshold = PeanutModel.getInstance().getpValue();
-		double thresholdBonferonni = threshold/resultList.size()*1.0;
+		double thresholdBonferroni = threshold/resultList.size()*1.0;
 
 		boolean noFDR = PeanutModel.getInstance().isNoFRD();
-		boolean bonferonni = PeanutModel.getInstance().isBonferonni();
+		boolean bonferroni = PeanutModel.getInstance().isBonferroni();
 		boolean bejaminiHoechstFDR = PeanutModel.getInstance().isBejaminiHoechstFDR();
 		
 		//initilize counter for benjamini hoechstberg
@@ -161,8 +161,8 @@ public class PathwayStatistics implements Task {
 				if (result.getOneTailed() <= threshold)
 					filteredList.add(result);
 		   
-			if (bonferonni)
-				if (result.getOneTailed() <= thresholdBonferonni)
+			if (bonferroni)
+				if (result.getOneTailed() <= thresholdBonferroni)
 					filteredList.add(result);
 			
 			if (bejaminiHoechstFDR)
@@ -198,7 +198,12 @@ public class PathwayStatistics implements Task {
 		//header of the output string displaying basic network properties
 		String outputStr = "name parent network:\t"+ PeanutModel.getInstance().getParentNetwork() +"\tsize parent network:\t" + PeanutModel.getInstance().getParentSize() + "\n";
 		outputStr = outputStr + "name child network:" + "\t"+ PeanutModel.getInstance().getChildNetwork() +  "\t" + "size child network:"+ "\t" + PeanutModel.getInstance().getChildSize() + "\t# pathways child network:\t" + PeanutModel.getInstance().getPathwayDistributionMap().size() + "\n"; 
-		outputStr = outputStr + "P-Value cutoff:\t" + PeanutModel.getInstance().getpValue() + "\n\n";
+		outputStr = outputStr + "P-Value cutoff:\t" + PeanutModel.getInstance().getpValue() + "\n";
+		
+		outputStr = outputStr + "No FDR:\t" + PeanutModel.getInstance().isNoFRD() + "\n";
+		outputStr = outputStr + "Bonferroni:\t" + PeanutModel.getInstance().isBonferroni() + "\n";
+		outputStr = outputStr + "Bejamini Hoechs\t" + PeanutModel.getInstance().isBejaminiHoechstFDR() + "\n\n";
+
 		
 		//header of the output string explaining the different variables of the contingency table
 		outputStr = outputStr + "Pathway name\t" + "Datasource\t"+ "# nodes (child network)\t" + "# different biological identifiers (child network)\t"+ "Coverage of the pathway\t";

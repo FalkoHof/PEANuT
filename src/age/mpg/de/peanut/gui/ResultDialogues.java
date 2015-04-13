@@ -76,7 +76,7 @@ public class ResultDialogues extends JDialog{
 	private File outputFile  = new File("output.txt");
 	private String[] networkIdArray;
 	private String[] networkTitleArray;
-	private String[] fdrArray = {"No FDR","Bonferonni","Benjamini Hochberg"};
+	private String[] fdrArray = {"No FDR","Bonferroni","Benjamini Hochberg"};
 
 	private PeanutTableModelPathways tableModel;
 	private JTable table;
@@ -165,23 +165,22 @@ public class ResultDialogues extends JDialog{
 		JComboBox fdrCorrection = new JComboBox(fdrArray);
 		fdrCorrection.setEditable(false);
 		fdrCorrection.setSelectedIndex(2);
-		//PeanutModel.getInstance().setChildNetwork(networkIdArray[0]);
 		fdrCorrection.addItemListener(new ItemListener(){
 	    	public void itemStateChanged(ItemEvent evt){
 	    		String input = (String) evt.getItem();
-	    		if (input.equals("No FDR")){
+	    		if (input.equals(fdrArray[0])){
 	    			PeanutModel.getInstance().setBejaminiHoechstFDR(false);
-	    			PeanutModel.getInstance().setBonferonni(false);
+	    			PeanutModel.getInstance().setBonferroni(false);
 	    			PeanutModel.getInstance().setNoFRD(true);
 	    		}
-	    		if (input.equals("Bonferroni")){
+	    		if (input.equals(fdrArray[1])){
 	    			PeanutModel.getInstance().setBejaminiHoechstFDR(false);
-	    			PeanutModel.getInstance().setBonferonni(true);
+	    			PeanutModel.getInstance().setBonferroni(true);
 	    			PeanutModel.getInstance().setNoFRD(false);
 	    		}
-	    		if (input.equals("Benjamini Hochberg")){
+	    		if (input.equals(fdrArray[2])){
 	    			PeanutModel.getInstance().setBejaminiHoechstFDR(true);
-	    			PeanutModel.getInstance().setBonferonni(false);
+	    			PeanutModel.getInstance().setBonferroni(false);
 	    			PeanutModel.getInstance().setNoFRD(false);
 	    		}
 	    	}});	
@@ -223,39 +222,8 @@ public class ResultDialogues extends JDialog{
 		JLabel jLableComboBoxNetworkParent = new JLabel(lableNetworkParent, JLabel.RIGHT);
 		JLabel jLableComboBoxNetworkChild = new JLabel(lableNetworkChild, JLabel.RIGHT);
 		JLabel jLableComboBoxFdr = new JLabel(lableFdr, JLabel.RIGHT);
-
 		JLabel jLableTextField = new JLabel(lableTextField,SwingConstants.TRAILING);
-		/*
-		//create JPanels for nicer look
-		JPanel panelParentNetwork = new JPanel();
-		JPanel panelChildNetwork = new JPanel();
-		JPanel panelTextField = new JPanel();
-		JPanel panelButtons = new JPanel();
-			
-		//set the layout of the panels
-		panelParentNetwork.setLayout(new BoxLayout(panelParentNetwork, BoxLayout.X_AXIS));
-		panelChildNetwork.setLayout(new BoxLayout(panelChildNetwork, BoxLayout.X_AXIS));
-		panelTextField.setLayout(new BoxLayout(panelTextField, BoxLayout.X_AXIS));
-		
-		
-		//add stuff to the panles
-		panelParentNetwork.add(jLableComboBoxNetworkParent);
-		panelParentNetwork.add(Box.createHorizontalGlue()); 
-		panelParentNetwork.add(cbNetworkParent);
-		
-		panelChildNetwork.add(jLableComboBoxNetworkChild);
-		panelChildNetwork.add(Box.createHorizontalGlue()); 
-		panelChildNetwork.add(cbNetworkChild);
 				
-		panelTextField.add(jLableTextField);
-		panelTextField.add(Box.createHorizontalGlue()); 
-		panelTextField.add(pValueField);
-			
-		panelButtons.add(searchBtn);
-		*/
-		//add stuff to the JPanel
-		
-		
 		JPanel selectNetworksPanel = new JPanel();
 	
 		selectNetworksPanel.add(jLableComboBoxNetworkParent);
