@@ -210,6 +210,9 @@ public class PathwayStatistics implements Task {
 		outputStr = outputStr + "Coverage of the pathway (%)\t" + "p-value (one-tailed Fisher's exact test)\t" + "Entrez/UniprotIds of the members\t";
 		outputStr = outputStr + "Cytoscape node IDs of the present proteins" +  "\n";  
 		
+		
+		List<StatisticResults> resultList = PeanutModel.getInstance().getStatisticsResultList();
+		
 		//loop that adds the statistic results to the output String
 		for (int i = 0; i< resultList.size(); i++)
 			outputStr = outputStr + resultList.get(i).getDisplayName() + "\t" + resultList.get(i).getDatabaseType()  + "\t" + resultList.get(i).getNumberOfNodes() + "\t" + resultList.get(i).getBioIdSet().size() + "\t" + resultList.get(i).getProportion() + "\t" + resultList.get(i).getCoverage()  + "\t" + resultList.get(i).getOneTailed() + "\t" + resultList.get(i).getIdSet() +"\t" + resultList.get(i).getCyIdSet() + "\n";
