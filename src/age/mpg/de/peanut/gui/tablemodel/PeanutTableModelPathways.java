@@ -98,9 +98,9 @@ public class PeanutTableModelPathways extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		StatisticResults result = resultList.get(rowIndex);	
+		
 		DecimalFormat dfPvalue = new DecimalFormat("0.###E0");	
 		DecimalFormat dfCoverage = new DecimalFormat("##.00");	
-
 		
 		switch(columnIndex){
 			case PATHWAYNAME_COLUMN:

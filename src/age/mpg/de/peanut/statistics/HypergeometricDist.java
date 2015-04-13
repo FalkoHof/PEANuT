@@ -17,14 +17,14 @@ public class HypergeometricDist {
 			
 			this.populationSize = parentNetworkSize;
 			this.numberOfSuccessesInPopulation = pathwaySize;
-			this.numberOfSuccesses = pathwaySize - foundPathwayMembers;
-			this.sampleSize = parentNetworkSize - childNetworkSize;
+			this.numberOfSuccesses = foundPathwayMembers;
+			this.sampleSize = childNetworkSize;
 		}
 		
 		
 		
 		public double computeOneTailedFisher(){	
 			HypergeometricDistribution hd = new HypergeometricDistribution(populationSize, numberOfSuccessesInPopulation, sampleSize);		
-			return hd.cumulativeProbability(numberOfSuccesses);
+			return hd.upperCumulativeProbability(numberOfSuccesses);
 		}
 }

@@ -31,6 +31,8 @@ import java.awt.event.ItemListener;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.Comparator;
+import java.util.Locale;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.PatternSyntaxException;
 
@@ -56,7 +58,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
 
-
 import age.mpg.de.peanut.Peanut;
 import age.mpg.de.peanut.cytoscape.CytoscapeAttributeGetter;
 import age.mpg.de.peanut.cytoscape.CytoscapeNodeSelector;
@@ -64,7 +65,6 @@ import age.mpg.de.peanut.gui.tablemodel.PeanutTableModelPathways;
 import age.mpg.de.peanut.model.PeanutModel;
 import age.mpg.de.peanut.statistics.PathwayStatistics;
 import age.mpg.de.peanut.utilityobjects.PluginProperties;
-
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 
@@ -174,7 +174,7 @@ public class ResultDialogues extends JDialog{
 	    			PeanutModel.getInstance().setBonferonni(false);
 	    			PeanutModel.getInstance().setNoFRD(true);
 	    		}
-	    		if (input.equals("Bonferonni")){
+	    		if (input.equals("Bonferroni")){
 	    			PeanutModel.getInstance().setBejaminiHoechstFDR(false);
 	    			PeanutModel.getInstance().setBonferonni(true);
 	    			PeanutModel.getInstance().setNoFRD(false);
@@ -277,8 +277,13 @@ public class ResultDialogues extends JDialog{
 		decimalCompare =  new Comparator<String>(){
 			@Override
 			public int compare(String decimal1, String decimal2) {
-				Double d1 = Double.parseDouble(decimal1);
-				Double d2 = Double.parseDouble(decimal2);
+				
+				Scanner scannerD1 = new Scanner(decimal1).useLocale(Locale.getDefault());
+				Double d1 = scannerD1.nextDouble();
+				
+				Scanner scannerD2 = new Scanner(decimal2).useLocale(Locale.getDefault());
+				Double d2 = scannerD2.nextDouble();
+				
 				return d1.compareTo(d2);			
 			}
 		};

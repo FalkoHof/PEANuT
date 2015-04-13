@@ -93,8 +93,7 @@ public class PathwayStatistics implements Task {
 		//get p-values for multipleTestingCorrection
 		threshold = multipleTestingCorrection(threshold,pathwayNames.size());
 
-		
-		
+				
 		int counter = 0;
 
 		//loop through all the pathways found in the child network
@@ -130,14 +129,9 @@ public class PathwayStatistics implements Task {
 						
 			double pValueOneTailed = hd.computeOneTailedFisher();
 			
-			//int compare = Double.compare(pValueOneTailed, threshold);
-			
-			//check if p-Value is below the set threshold
-			//if (compare == 0 || compare < 0){
-				StatisticResults res = new StatisticResults(s, obj.getBioIdsFoundMembers(), obj.getCytoscapeIdsFoundMembers(), obj.getPathwaySize(),pValueOneTailed);
-				resultList.add(res);
-			//}
-				
+			StatisticResults res = new StatisticResults(s, obj.getBioIdsFoundMembers(), obj.getCytoscapeIdsFoundMembers(), obj.getPathwaySize(),pValueOneTailed);
+			resultList.add(res);
+							
 		}
 		//Sort list in ascending order for fdr correction		
 		Collections.sort(resultList);
