@@ -29,10 +29,9 @@ public class DependenciesDownloader implements Task {
 	private String consensusPathDBDirectory = PluginProperties.getInstance().getConsensusPathDBDirectory();
 	private String[] consensusPathDBURLs = PluginProperties.getInstance().getConsensusPathDBWebResource();
 
-	private String[] wikiPathwaysFileArr = PluginProperties.getInstance().getWikiPathwaysFiles();
 	private String wikiPathwaysDirectory = PluginProperties.getInstance().getWikiPathwaysDirectory();
 	private String wikiPathwaysURL = PluginProperties.getInstance().getWpWebResource();
-	
+	private String wikiPathwaysFile = PluginProperties.getInstance().getWpFile();
 	
 	private List<File> fileList = new ArrayList<File>();
 	
@@ -102,8 +101,10 @@ public class DependenciesDownloader implements Task {
 	
 	private void checkWikiPathwayFiles(){
 		File wpDir = new File(wikiPathwaysDirectory);
-		for (String s : wikiPathwaysFileArr)
-			fileList.add(new File(wpDir,s));
+		fileList.add(new File(wpDir,wikiPathwaysFile));
+		
+		//for (String s : wikiPathwaysFileArr)
+		//	fileList.add(new File(wpDir,s));
 	}
 
 	private void downloadAll() throws IOException{
@@ -133,7 +134,7 @@ public class DependenciesDownloader implements Task {
 		File wpDir = new File(wikiPathwaysDirectory);
 		if (!wpDir.exists())
 			wpDir.mkdirs();
-
+		/*
 		int counter = 0;
 		for (String s : wikiPathwaysFileArr){
 			//break statement for cancel option
@@ -142,8 +143,11 @@ public class DependenciesDownloader implements Task {
 				break;
 			}
 			taskMonitor.setPercentCompleted(TaskManagerManager.getInstance().getPercentage(counter, wikiPathwaysFileArr.length));
+	
 			copyFileFromUrl(new URL(wikiPathwaysURL + s), new File(wpDir,s));
-		}
+			*/
+		copyFileFromUrl(new URL(wikiPathwaysURL + wikiPathwaysFile), new File(wpDir,wikiPathwaysFile));
+		//}
 	}
 
 	

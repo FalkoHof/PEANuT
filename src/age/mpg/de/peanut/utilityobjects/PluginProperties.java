@@ -56,11 +56,7 @@ public class PluginProperties {
     public String getWikiPathwaysDirectory(){
     	return props.getProperty("wikipathwaysDirectory");
     }
-    
-    public String[] getWikiPathwaysFiles(){
-    	return props.getProperty("wpFileNames").trim().split(";");
-    }
-  
+
     
     public String[] getDatabases(){
     	return props.getProperty("databases").trim().split(";");
@@ -95,20 +91,12 @@ public class PluginProperties {
 		return props.getProperty("consensusPathDBFiles").trim().split(";");
     }
     
-    
-    /*
-    public int[] getTaxId(){
-    	String [] taxIdsString = (String[])props.getProperty("taxIds").trim().split(";");
-    	int[] taxIds = new int[taxIdsString.length];
-    	
-    	for (int i = 0; i<taxIdsString.length; i++)
-    		taxIds[i] = Integer.parseInt(taxIdsString[i]);
-    	
-    	return taxIds;
-    }*/
-
     public String [] getWpOrganisms(){
     	return (String []) props.getProperty("wpOrganisms").trim().split(";");
+    }
+    
+    public String getWpFile(){
+    	return (String) props.getProperty("wpFile").trim();
     }
     
     public String [] getConsensusPathDBOrganisms(){

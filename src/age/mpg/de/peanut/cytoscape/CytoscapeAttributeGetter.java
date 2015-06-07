@@ -96,7 +96,7 @@ public class CytoscapeAttributeGetter implements Task{
 		}
 		else{
 			InvalidParameterException e = new InvalidParameterException("Invalid attributeColumn parameter for CytoscapeAttributeGetter");
-			logger.error("Error while getting " + attributeColumn+ " attributes from cytoscape", e);
+			logger.error("Error while getting " + attributeColumn + " attributes from cytoscape", e);
 			throw e;
 		}
 		

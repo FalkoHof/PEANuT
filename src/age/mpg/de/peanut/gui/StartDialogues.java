@@ -90,7 +90,6 @@ public class StartDialogues extends JDialog {
 	
     public void showDialogue(){
     	
-    	
 		logger.info("showDialogue(): adding tabs to JTabbedPane");
 		tabContainer.addTab(DATABASES[CONSENSUS_PATH_DB],consensusPathDBPanel());
     	tabContainer.addTab(DATABASES[PATHWAY_COMMONS],pathwayCommonsPanel());
@@ -133,11 +132,8 @@ public class StartDialogues extends JDialog {
     	
 		logger.info("addButtons(): Creating & registering buttons...");
     	
-		
-		
 		JButton startBttn = new JButton("Start"); 
 		JButton cancelBttn = new JButton("Cancel");
-
 		
  	    startBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -179,8 +175,8 @@ public class StartDialogues extends JDialog {
 		    	
     	// create the objects contained in this JPlanel
     	JLabel wikipathwaysOrganismLable = new JLabel(organism);
-        JLabel uniProtIdLable = new JLabel(uniprot);
-        
+        JLabel wpEntrezLable = new JLabel("Entrez Gene ID:");
+                
         JComboBox wikiPathwaysOrganismComboBx = new JComboBox(wpOrganisms);
         JComboBox wikiPathwaysIdComboBx = new JComboBox(cyAttributesHeaders);
     	
@@ -233,7 +229,7 @@ public class StartDialogues extends JDialog {
             wikiPathwaysIdPanelLayout.createParallelGroup(GroupLayout.LEADING)
             .add(wikiPathwaysIdPanelLayout.createSequentialGroup()
                 .add(25, 25, 25)
-                .add(uniProtIdLable)
+                .add(wpEntrezLable)
                 .add(46, 46, 46)
                 .add(wikiPathwaysIdComboBx, 0, 253, Short.MAX_VALUE)
                 .addContainerGap())
@@ -244,7 +240,7 @@ public class StartDialogues extends JDialog {
                 .add(32, 32, 32)
                 .add(wikiPathwaysIdPanelLayout.createParallelGroup(GroupLayout.BASELINE)
                     .add(wikiPathwaysIdComboBx, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .add(uniProtIdLable))
+                    .add(wpEntrezLable))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         //layout for the super panel

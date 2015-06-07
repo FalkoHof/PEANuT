@@ -105,14 +105,19 @@ public class Parser implements Task {
 				break;
 			}
 			
-			//substitute the space in the organism name with the html character in the downloaded files.
-			String organism = PeanutModel.getInstance().getOrganism().replace(" ", "%20");
+			String organism = PeanutModel.getInstance().getOrganism();
+			String wpFileName = PluginProperties.getInstance().getWpFile();
+			
 			//parses the file if the file belongs to the selected organism
-			if (file.toString().contains(organism)){
+			if (file.toString().contains(organism) || file.toString().contains(wpFileName)){
 				logger.info("parsing: " + file);
 				BufferedReader reader = new BufferedReader(new FileReader(file));
 				
-				String line = reader.readLine(); // used to skip the first line headers
+				String line;
+				//skip cpdb files first line headers
+				if (cpdb)
+					line = reader.readLine(); 
+				
 				while((line = reader.readLine()) != null){
 					if (interrupted){
 						PeanutModel.getInstance().setExit(true);
@@ -122,24 +127,29 @@ public class Parser implements Task {
 					if (cpdb)
 						processCPDBLine(line);
 					if (wp)
-						processWPLine(line);	
+						processWPLine(line, organism);	
 				}
 			}
 		}
 	}
 
-
 	//method to process one line of the wiki pathways flatfile
-	private void processWPLine(String line){
-		String[] temp = line.split("\t");
-		if (temp.length > 9){
-			String pathwayName = temp[0].trim();
-			String pathwayURL = temp[3].trim();
-			String pathwayID = pathwayURL.split("Pathway:")[1];
-			String ids = temp[10].trim();
-			List<String>uniprotIdList = Arrays.asList(ids.split("[,]"));
-			WikiPathwaysObject pathway =  new WikiPathwaysObject(pathwayName,pathwayID, uniprotIdList);
-			wpPathways.add(pathway);
+	private void processWPLine(String line, String organism){
+		
+		if (line.contains(organism)){
+			String[] temp = line.split("\t");
+				String[] names = temp[0].trim().split("\\(" + organism);
+					String pathwayName = names[0].trim();
+				String pathwayURL = temp[1].trim();
+					String pathwayID = pathwayURL.split("instance" + "\\/")[1];
+					
+				List<String>entrezIdList = new ArrayList<String>();
+					
+				for (int i = 2; i < temp.length; i++)
+					entrezIdList.add(temp[i]);
+								
+				WikiPathwaysObject pathway =  new WikiPathwaysObject(pathwayName,pathwayID, entrezIdList);
+				wpPathways.add(pathway);
 		}
 	}
 
