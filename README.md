@@ -10,9 +10,10 @@ PEANuT utilizes data from the following databases:
 
 The version for Cytoscape 3.x is available via <http://sourceforge.net/projects/peanutv3/>
 
-PEANuT is designed to work in concert with the VIPER and COMFI plugins.
+PEANuT is designed to work in concert with the VIPER and [COMFI](https://github.com/FalkoHof/COMFI) plugins.
 
 If you use PEANuT please cite:
+
 [Garmhausen, M. et al. Virtual pathway explorer (viPEr) and pathway enrichment analysis tool (PEANuT): creating and analyzing focus networks to identify cross-talk between molecules and pathways. BMC Genomics 16, 790 (2015).](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-015-2017-z)
 
 ## Installation
@@ -20,8 +21,8 @@ If you use PEANuT please cite:
 ### System requirements
 
 - Internet connection
-- Java 1.5+
-- Cytoscape 2.8
+- [Java 1.5+](https://www.oracle.com/technetwork/java/index.html)
+- [Cytoscape 2.8](https://cytoscape.org/)
 
 ### Installation procedure
 
@@ -35,17 +36,17 @@ In general the installation procedure comprises 2 simple, quick steps:
 There are three easy, different ways to install PEANuT in Cytoscape:
 
 1. Search for the PEANuT plugin under the Cytoscape menu “plugins” “manage plugins” and click on install.
-2. Download the [PEANuT.jar](../blob/master/bin/PEANuT.jar) file from the project page and click on “Plugins” “Install plugin from file” and select the downloaded .jar file.
-3. Download the [PEANuT.jar](../blob/master/bin/PEANuT.jar) file from the project page and place it in the “plugins” folder in your Cytoscape installation directory.
+2. Download the [PEANuT.jar](../master/bin/PEANuT.jar) file from the project page and click on “Plugins” “Install plugin from file” and select the downloaded .jar file.
+3. Download the [PEANuT.jar](../master/bin/PEANuT.jar) file from the project page and place it in the “plugins” folder in your Cytoscape installation directory.
 
-![menuOverview](../blob/master/assets/menuOverview.png)
+![menuOverview](../master/assets/menuOverview.png)
 If the plugin is correctly installed you should now be able to see a new “PEANuT” entry in the “plugins menu”. If that is not the case try restarting Cytoscape.
 
 ### Setting up PEANuT
 
 In order to work properly PEANuT requires several files from the ConsensusPathDB and WikiPathways databases. To download these files go to the “Download/update dependencies” submenu in the “PEANuT” entry.
 You should see a dialogue like below pop up. Just click on the symbol in the red circle and download all files. This should only take a few seconds. When the download is completed you will be notified of a successful download and the status icon will switch from the red cross to a green tick. This means that PEANuT is now ready to use!
-![installation2](../blob/master/assets/install2.png)
+![installation2](../master/assets/install2.png)
 If you have no access to the internet or can't download the files due to server issues from the databases you can also download a zipped archive here.
 After downloading simply unzip the contents into you Cytoscape plugin folder. However the zip file might contain slightly older file versions.
 
@@ -67,13 +68,13 @@ The PEANuT menu comprises the submenus:
 1. Find pathways
 2. Show results
 3. Download/update dependencies
-![download_menu](../blob/master/assets/downloadMenu.png)
+![download_menu](../master/assets/downloadMenu.png)
 
 ### Find pathways
 
 The menu entry “Find pathways” allows the user to annotate the nodes of a Cytoscape session with information from the three different pathway databases [ConsensusPathDB](http://consensuspathdb.org/), [Pathway Commons](http://www.pathwaycommons.org/) and [WikiPathways](http://www.wikipathways.org/).
 
-After clicking on the “Find pathways” submenu a dialogue as displayed in the figure below will pop up. There you have the possibility so select the database of your choice via the 3 tabs displayed on top of the dialogue. After selecting a database you will be provided with several other options that need to be set according to your data and preferences.![findPathwaysMenu](../blob/master/assets/findPathwaysMenu.png)
+After clicking on the “Find pathways” submenu a dialogue as displayed in the figure below will pop up. There you have the possibility so select the database of your choice via the 3 tabs displayed on top of the dialogue. After selecting a database you will be provided with several other options that need to be set according to your data and preferences.![findPathwaysMenu](../master/assets/findPathwaysMenu.png)
 
 
 
@@ -90,7 +91,7 @@ When clicking on the “Show results” submenu a dialogue as displayed in the f
 6. Search result table for keywords: If you are looking for specific pathways you can type keywords in this text field and search the result table (case insensitive).
 7. Export results as .tab file: Clicking this button will open a file chooser that will allow you to save the results displayed in the table as a tab separated file that can easily be imported in to Excel, OpenOffice etc.
 8. Select nodes in the focus network: Clicking this button will select the nodes of the ticked pathways (Column select nodes) in the focus network.
-![resultMenu](../blob/master/assets/resultMenu.png)
+![resultMenu](../master/assets/resultMenu.png)
 
 If you want to get some hand on experience with PEANuT you can download a test network comprised out of the yeast proteome here and have a look at our walkthrough example below.
 
@@ -100,8 +101,8 @@ If you want to get some hand on experience with PEANuT you can download a test n
 
 Before we can dive into the example you need to:
 
-1. Install Cytoscape and [PEANuT](../blob/master/bin/PEANuT.jar)  (see our installation guide)
-2. Download our [example network](../blob/master/assets/yestTestNetwork.cys)
+1. Install Cytoscape and [PEANuT](../master/bin/PEANuT.jar)  (see our installation guide)
+2. Download our [example network](../master/assets/yestTestNetwork.cys)
 
 ### Getting started
 
