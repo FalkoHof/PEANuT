@@ -47,6 +47,7 @@ If the plugin is correctly installed you should now be able to see a new “PEAN
 In order to work properly PEANuT requires several files from the ConsensusPathDB and WikiPathways databases. To download these files go to the “Download/update dependencies” submenu in the “PEANuT” entry.
 You should see a dialogue like below pop up. Just click on the symbol in the red circle and download all files. This should only take a few seconds. When the download is completed you will be notified of a successful download and the status icon will switch from the red cross to a green tick. This means that PEANuT is now ready to use!
 ![installation2](../master/assets/install2.png)
+
 If you have no access to the internet or can't download the files due to server issues from the databases you can also download a zipped archive here.
 After downloading simply unzip the contents into you Cytoscape plugin folder. However the zip file might contain slightly older file versions.
 
@@ -59,7 +60,7 @@ After downloading simply unzip the contents into you Cytoscape plugin folder. Ho
    cytoscape.plugins.path=YourCytoscapeFolder/plugins/
 3. run build.xml as ant script to compile the plugin
 
-## [User guide](user-guide)
+## User guide
 
 ### The Menu structure
 
