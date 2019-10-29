@@ -6,9 +6,9 @@ PEANuT is a Cytoscape 2.8.3 plugin for pathway enrichment analysis.
 
 PEANuT utilizes data from the following databases:
 
-- ConsensusPathDB
-- PathwayCommons
-- WikiPathways
+- [ConsensusPathDB](http://consensuspathdb.org/)
+- [PathwayCommons](http://www.pathwaycommons.org/)
+- [WikiPathways](http://www.wikipathways.org/)
 
 The version for Cytoscape 3.x is available via <http://sourceforge.net/projects/peanutv3/>
 
